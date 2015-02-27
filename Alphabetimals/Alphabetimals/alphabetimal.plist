@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+<dict><key>AnimalName</key><string>RAT</string><key>Unicode</key><string>\uD83D\uDC00</string></dict>
+<dict><key>AnimalName</key><string>MOUSE</string><key>Unicode</key><string>\uD83D\uDC01</string></dict>
+<dict><key>AnimalName</key><string>OX</string><key>Unicode</key><string>\uD83D\uDC02</string></dict>
+<dict><key>AnimalName</key><string>WATER BUFFALO</string><key>Unicode</key><string>\uD83D\uDC03</string></dict>
+<dict><key>AnimalName</key><string>COW</string><key>Unicode</key><string>\uD83D\uDC04</string></dict>
+<dict><key>AnimalName</key><string>TIGER</string><key>Unicode</key><string>\uD83D\uDC05</string></dict>
+<dict><key>AnimalName</key><string>LEOPARD</string><key>Unicode</key><string>\uD83D\uDC06</string></dict>
+<dict><key>AnimalName</key><string>RABBIT</string><key>Unicode</key><string>\uD83D\uDC07</string></dict>
+<dict><key>AnimalName</key><string>CAT</string><key>Unicode</key><string>\uD83D\uDC08</string></dict>
+<dict><key>AnimalName</key><string>DRAGON</string><key>Unicode</key><string>\uD83D\uDC09</string></dict>
+<dict><key>AnimalName</key><string>CROCODILE</string><key>Unicode</key><string>\uD83D\uDC0A</string></dict>
+<dict><key>AnimalName</key><string>WHALE</string><key>Unicode</key><string>\uD83D\uDC0B</string></dict>
+<dict><key>AnimalName</key><string>SNAIL</string><key>Unicode</key><string>\uD83D\uDC0C</string></dict>
+<dict><key>AnimalName</key><string>SNAKE</string><key>Unicode</key><string>\uD83D\uDC0D</string></dict>
+<dict><key>AnimalName</key><string>HORSE</string><key>Unicode</key><string>\uD83D\uDC0E</string></dict>
+<dict><key>AnimalName</key><string>RAM</string><key>Unicode</key><string>\uD83D\uDC0F</string></dict>
+<dict><key>AnimalName</key><string>GOAT</string><key>Unicode</key><string>\uD83D\uDC10</string></dict>
+<dict><key>AnimalName</key><string>SHEEP</string><key>Unicode</key><string>\uD83D\uDC11</string></dict>
+<dict><key>AnimalName</key><string>MONKEY</string><key>Unicode</key><string>\uD83D\uDC12</string></dict>
+<dict><key>AnimalName</key><string>ROOSTER</string><key>Unicode</key><string>\uD83D\uDC13</string></dict>
+<dict><key>AnimalName</key><string>CHICKEN</string><key>Unicode</key><string>\uD83D\uDC14</string></dict>
+<dict><key>AnimalName</key><string>DOG</string><key>Unicode</key><string>\uD83D\uDC15</string></dict>
+<dict><key>AnimalName</key><string>PIG</string><key>Unicode</key><string>\uD83D\uDC16</string></dict>
+<dict><key>AnimalName</key><string>BOAR</string><key>Unicode</key><string>\uD83D\uDC17</string></dict>
+<dict><key>AnimalName</key><string>ELEPHANT</string><key>Unicode</key><string>\uD83D\uDC18</string></dict>
+<dict><key>AnimalName</key><string>OCTOPUS</string><key>Unicode</key><string>\uD83D\uDC19</string></dict>
+<dict><key>AnimalName</key><string>SPIRAL SHELL</string><key>Unicode</key><string>\uD83D\uDC1A</string></dict>
+<dict><key>AnimalName</key><string>BUG</string><key>Unicode</key><string>\uD83D\uDC1B</string></dict>
+<dict><key>AnimalName</key><string>ANT</string><key>Unicode</key><string>\uD83D\uDC1C</string></dict>
+<dict><key>AnimalName</key><string>HONEYBEE</string><key>Unicode</key><string>\uD83D\uDC1D</string></dict>
+<dict><key>AnimalName</key><string>LADY BEETLE</string><key>Unicode</key><string>\uD83D\uDC1E</string></dict>
+<dict><key>AnimalName</key><string>FISH</string><key>Unicode</key><string>\uD83D\uDC1F</string></dict>
+<dict><key>AnimalName</key><string>TROPICAL FISH</string><key>Unicode</key><string>\uD83D\uDC20</string></dict>
+<dict><key>AnimalName</key><string>BLOWFISH</string><key>Unicode</key><string>\uD83D\uDC21</string></dict>
+<dict><key>AnimalName</key><string>TURTLE</string><key>Unicode</key><string>\uD83D\uDC22</string></dict>
+<dict><key>AnimalName</key><string>HATCHING CHICK</string><key>Unicode</key><string>\uD83D\uDC23</string></dict>
+<dict><key>AnimalName</key><string>BABY CHICK</string><key>Unicode</key><string>\uD83D\uDC24</string></dict>
+<dict><key>AnimalName</key><string>FRONT-FACING BABY CHICK</string><key>Unicode</key><string>\uD83D\uDC25</string></dict>
+<dict><key>AnimalName</key><string>BIRD</string><key>Unicode</key><string>\uD83D\uDC26</string></dict>
+<dict><key>AnimalName</key><string>PENGUIN</string><key>Unicode</key><string>\uD83D\uDC27</string></dict>
+<dict><key>AnimalName</key><string>KOALA</string><key>Unicode</key><string>\uD83D\uDC28</string></dict>
+<dict><key>AnimalName</key><string>POODLE</string><key>Unicode</key><string>\uD83D\uDC29</string></dict>
+<dict><key>AnimalName</key><string>DROMEDARY CAMEL</string><key>Unicode</key><string>\uD83D\uDC2A</string></dict>
+<dict><key>AnimalName</key><string>BACTRIAN CAMEL</string><key>Unicode</key><string>\uD83D\uDC2B</string></dict>
+<dict><key>AnimalName</key><string>DOLPHIN</string><key>Unicode</key><string>\uD83D\uDC2C</string></dict>
+<dict><key>AnimalName</key><string>MOUSE FACE</string><key>Unicode</key><string>\uD83D\uDC2D</string></dict>
+<dict><key>AnimalName</key><string>COW FACE</string><key>Unicode</key><string>\uD83D\uDC2E</string></dict>
+<dict><key>AnimalName</key><string>TIGER FACE</string><key>Unicode</key><string>\uD83D\uDC2F</string></dict>
+<dict><key>AnimalName</key><string>RABBIT FACE</string><key>Unicode</key><string>\uD83D\uDC30</string></dict>
+<dict><key>AnimalName</key><string>CAT FACE</string><key>Unicode</key><string>\uD83D\uDC31</string></dict>
+<dict><key>AnimalName</key><string>DRAGON FACE</string><key>Unicode</key><string>\uD83D\uDC32</string></dict>
+<dict><key>AnimalName</key><string>SPOUTING WHALE</string><key>Unicode</key><string>\uD83D\uDC33</string></dict>
+<dict><key>AnimalName</key><string>HORSE FACE</string><key>Unicode</key><string>\uD83D\uDC34</string></dict>
+<dict><key>AnimalName</key><string>MONKEY FACE</string><key>Unicode</key><string>\uD83D\uDC35</string></dict>
+<dict><key>AnimalName</key><string>DOG FACE</string><key>Unicode</key><string>\uD83D\uDC36</string></dict>
+<dict><key>AnimalName</key><string>PIG FACE</string><key>Unicode</key><string>\uD83D\uDC37</string></dict>
+<dict><key>AnimalName</key><string>FROG FACE</string><key>Unicode</key><string>\uD83D\uDC38</string></dict>
+<dict><key>AnimalName</key><string>HAMSTER FACE</string><key>Unicode</key><string>\uD83D\uDC39</string></dict>
+<dict><key>AnimalName</key><string>WOLF FACE</string><key>Unicode</key><string>\uD83D\uDC3A</string></dict>
+<dict><key>AnimalName</key><string>BEAR FACE</string><key>Unicode</key><string>\uD83D\uDC3B</string></dict>
+<dict><key>AnimalName</key><string>PANDA FACE</string><key>Unicode</key><string>\uD83D\uDC3C</string></dict>
+<dict><key>AnimalName</key><string>PIG NOSE</string><key>Unicode</key><string>\uD83D\uDC3D</string></dict>
+<dict><key>AnimalName</key><string>PAW PRINTS</string><key>Unicode</key><string>\uD83D\uDC3E</string></dict>
+
+</array>
+</plist>
