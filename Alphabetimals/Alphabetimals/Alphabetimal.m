@@ -21,7 +21,7 @@
         self.emoji = [NSString
                               stringWithCString:[dictionary[@"Unicode"]cStringUsingEncoding:NSUTF8StringEncoding]
                               encoding:NSNonLossyASCIIStringEncoding];
-        
+        self.displayName = [NSString stringWithFormat:@"%@ %@", self.name, self.emoji];
     }
     return self;
 }

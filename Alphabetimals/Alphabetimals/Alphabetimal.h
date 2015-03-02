@@ -12,6 +12,7 @@
 
 @property NSString *name;
 @property NSString *emoji;
+@property NSString *displayName;
 
 + (instancetype)alphabetimalWithDictionary:(NSDictionary *)dictionary;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

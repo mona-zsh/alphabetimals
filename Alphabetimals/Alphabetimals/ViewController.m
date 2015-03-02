@@ -26,9 +26,8 @@
 @property (nonatomic) UITableView *tableView;
 
 // Data Source
-@property (nonatomic) NSMutableArray *autocompleteAnimalArray; // Array of Alphabetimal names from autocomplete
-@property (nonatomic) NSArray *animalNameArray;                // Array of all animal names for autocomplete
-@property (nonatomic) NSDictionary *alphabetimalDictionary;    // Dict of all Alphabetimal names to Alphabetimal object
+@property (nonatomic) NSMutableArray *autocompleteAnimalArray; // Array of Alphabetimal display names from autocomplete
+@property (nonatomic) NSArray *alphabetimalArray;              // Array of all Alphabetimals
 @property (nonatomic) Alphabetimal *selectedAlphabetimal;      // Current Alphabetimal selection from autocomplete table view
 
 @end
@@ -56,18 +55,14 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
     NSString *animalsPlist = [[NSBundle mainBundle] pathForResource:@"alphabetimal" ofType:@"plist"];
     NSArray *plistArray = [[NSArray alloc] initWithContentsOfFile:animalsPlist];
     
-    NSMutableDictionary *nameToAlphabetimalMappingFromPlist = [[NSMutableDictionary alloc] initWithCapacity:[plistArray count]];
-    NSMutableArray *animalNameArrayFromPlist = [[NSMutableArray alloc] initWithCapacity:[plistArray count]];
+    NSMutableArray *alphabetimalArray = [[NSMutableArray alloc] initWithCapacity:[plistArray count]];
     
     for (NSDictionary *animalDictionary in plistArray) {
         Alphabetimal *alphabetimal = [Alphabetimal alphabetimalWithDictionary:animalDictionary];
-        nameToAlphabetimalMappingFromPlist[alphabetimal.name] = alphabetimal;
-        [animalNameArrayFromPlist addObject:alphabetimal.name];
+        [alphabetimalArray addObject:alphabetimal];
     }
-                                           
     
-    self.alphabetimalDictionary = nameToAlphabetimalMappingFromPlist;
-    self.animalNameArray = animalNameArrayFromPlist;
+    self.alphabetimalArray = alphabetimalArray;
 }
 
 #pragma mark - Properties
@@ -150,7 +145,7 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
     if (selectedAlphabetimal == nil) {
         self.textFieldTableViewCell.accessoryType = UITableViewCellAccessoryNone;
     } else {
-        self.textField.text = selectedAlphabetimal.name;
+        self.textField.text = selectedAlphabetimal.displayName;
         self.textFieldTableViewCell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
@@ -162,14 +157,7 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        if (self.selectedAlphabetimal != nil) {
-            // User has selected an alphabetimal!
-            // Display text field with selected alphabetimal name and display emoji in cell below
-            return 2;
-        } else {
-            // User has not selected an alphabetimal, display text field for input only
-            return 1;
-        }
+        return 1;
     } else {
         if ([self.autocompleteAnimalArray count] == 0) {
             // User is not currently typing; no autocomplete
@@ -194,9 +182,6 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
         if (indexPath.row == 0) {
             // Cell with text field is always in first section and row
             return self.textFieldTableViewCell;
-        } else {
-            // Cell in section 0, row 1 will display emoji associated with selected alphabetimal
-            cell.textLabel.text = self.selectedAlphabetimal.emoji;
         }
     } else if (indexPath.section == 1) {
         if ([self.autocompleteAnimalArray count] > 0) {
@@ -216,8 +201,7 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.autocompleteAnimalArray count] > 0) {
-        NSString *nameOfAnimal = self.autocompleteAnimalArray[indexPath.row];
-        Alphabetimal *alphabetimal = self.alphabetimalDictionary[nameOfAnimal];
+        Alphabetimal *alphabetimal = self.alphabetimalArray[indexPath.row];
         
         // Set selected alphabetimal, which will update the tableview and call reloadData
         self.selectedAlphabetimal = alphabetimal;
@@ -276,10 +260,11 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
 - (void)reloadAutoCompleteAnimalArrayFromString:(NSString *)string {
     // Find all alphabetimals with a name that starts with the current string in text field
     [self.autocompleteAnimalArray removeAllObjects];
-    for (NSString *animalName in self.animalNameArray) {
-        NSRange substringRange = [[animalName lowercaseString] rangeOfString:string];
+    for (Alphabetimal *alphabetimal in self.alphabetimalArray) {
+        NSString *animalDisplayName = alphabetimal.displayName;
+        NSRange substringRange = [[animalDisplayName lowercaseString] rangeOfString:string];
         if (substringRange.location == 0) {
-            [self.autocompleteAnimalArray addObject:animalName];
+            [self.autocompleteAnimalArray addObject:animalDisplayName];
         }
     }
 }
