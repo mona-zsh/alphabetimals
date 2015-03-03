@@ -186,7 +186,7 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
     } else if (indexPath.section == 1) {
         if ([self.autocompleteAnimalArray count] > 0) {
             // Display name of autocomplete animal at this index path
-            cell.textLabel.text = self.autocompleteAnimalArray[indexPath.row];
+            cell.textLabel.text = ((Alphabetimal *)self.autocompleteAnimalArray[indexPath.row]).displayName;
         } else {
             cell.textLabel.textColor = [UIColor colorWithRed:135/255.0 green:206/255.0 blue:255/255.0 alpha:1.0];
             if (self.selectedAlphabetimal) {
@@ -201,11 +201,7 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.autocompleteAnimalArray count] > 0) {
-        Alphabetimal *alphabetimal = self.alphabetimalArray[indexPath.row];
-        
-        // Set selected alphabetimal, which will update the tableview and call reloadData
-        self.selectedAlphabetimal = alphabetimal;
-        
+        self.selectedAlphabetimal = self.autocompleteAnimalArray[indexPath.row];
     } else {
         // If there is no autocomplete array, selecting the first row of the second section
         // should prompt the user to enter text in the textfield.
@@ -264,7 +260,7 @@ NSString * const CELL_IDENTIFIER = @"ANIMAL_CELL";
         NSString *animalDisplayName = alphabetimal.displayName;
         NSRange substringRange = [[animalDisplayName lowercaseString] rangeOfString:string];
         if (substringRange.location == 0) {
-            [self.autocompleteAnimalArray addObject:animalDisplayName];
+            [self.autocompleteAnimalArray addObject:alphabetimal];
         }
     }
 }
