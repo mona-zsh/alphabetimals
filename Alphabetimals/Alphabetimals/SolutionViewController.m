@@ -1,55 +1,77 @@
 //
-//  ViewController.m
+//  SolutionViewController.m
 //  Alphabetimals
 //
-//  Created by Mona Zhang on 2/23/15.
+//  Created by Mona Zhang on 3/3/15.
 //  Copyright (c) 2015 Mona Zhang. All rights reserved.
 //
 
 #import "Alphabetimal.h"
+
 #import "AATableViewCell.h"
 #import "AATextField.h"
 
-
 #import "SolutionViewController.h"
 
-#import "ViewController.h"
+@interface SolutionViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-
-// Views
-@property (nonatomic) UIBarButtonItem *rightBarButtonItem;
-@property (nonatomic) UIButton *footerButton;
 @property (nonatomic) AATableViewCell *textFieldTableViewCell; // Table view cell that displays selected alphabetimal name
 // and accepts user input
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) AATextField *textField;                  // User can type into textfield to get an autocomplete
 // list of animal names.
+@property (nonatomic) UIBarButtonItem *leftBarButtonItem; // To cancel
 
 // Data Source
 @property (nonatomic) NSArray *alphabetimalArray;              // Array of all Alphabetimals
 @property (nonatomic) NSMutableArray *autocompleteAnimalArray; // Array of Alphabetimal display names from autocomplete
 @property (nonatomic) Alphabetimal *selectedAlphabetimal;      // Current Alphabetimal selection from autocomplete table view
 
+@property CGFloat navBarHeight;
+
 @end
 
-@implementation ViewController
+@implementation SolutionViewController
 
-NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
+NSString * const SOLUTION_CELL_IDENTIFER = @"ANIMAL_CELL";
+CGFloat const TEXT_FIELD_TABLEVIEW_CELL_HEIGHT = 44.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
+    self.navigationItem.leftBarButtonItem = self.leftBarButtonItem;
+    self.navBarHeight = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
     
     // Add tableview and register tableviewcell class
     [self.view addSubview:self.tableView];
-    self.tableView.frame = self.view.frame;
-    self.tableView.tableFooterView = self.footerButton;
-    [self.tableView registerClass:[AATableViewCell class] forCellReuseIdentifier:CELL_IDENTIFER];
+    [self.view addSubview:self.textFieldTableViewCell];
     
+    // Set up frames
+    self.tableView.frame = CGRectMake(
+                                      0,
+                                      self.navBarHeight + TEXT_FIELD_TABLEVIEW_CELL_HEIGHT,
+                                      self.view.frame.size.width,
+                                      self.view.frame.size.height - (self.navBarHeight + TEXT_FIELD_TABLEVIEW_CELL_HEIGHT)
+                                      );
+    self.textFieldTableViewCell.frame = CGRectMake(
+                                                   0,
+                                                   self.navBarHeight,
+                                                   self.view.frame.size.width,
+                                                   TEXT_FIELD_TABLEVIEW_CELL_HEIGHT
+                                                   );
+    
+    self.textField.callSuperResignFirstResponder = YES;
+    [self.tableView registerClass:[AATableViewCell class] forCellReuseIdentifier:SOLUTION_CELL_IDENTIFER];
+    
+
     // Load alphabetimal name to data source arrays
     [self loadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
 }
 
 - (void)loadData {
@@ -71,41 +93,54 @@ NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
 
 #pragma mark - Properties
 
+- (UIBarButtonItem *)leftBarButtonItem {
+    if (!_leftBarButtonItem) {
+        _leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismiss:)];
+    }
+    return _leftBarButtonItem;
+}
+
 - (AATableViewCell *)textFieldTableViewCell {
     if (!_textFieldTableViewCell) {
         _textFieldTableViewCell = [[AATableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        
+        _textFieldTableViewCell.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0];
+        _textFieldTableViewCell.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0].CGColor;
+        _textFieldTableViewCell.layer.borderWidth = 1.0;
+        _textFieldTableViewCell.layer.cornerRadius = 3.0;
+        
         [_textFieldTableViewCell addSubview:self.textField];
         [_textFieldTableViewCell addConstraint:[NSLayoutConstraint constraintWithItem:self.textField
-                                                                                attribute:NSLayoutAttributeCenterX
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:_textFieldTableViewCell
-                                                                                attribute:NSLayoutAttributeCenterX
-                                                                               multiplier:1.0
-                                                                                 constant:0]];
+                                                                            attribute:NSLayoutAttributeCenterX
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_textFieldTableViewCell
+                                                                            attribute:NSLayoutAttributeCenterX
+                                                                           multiplier:1.0
+                                                                             constant:0]];
         
         [_textFieldTableViewCell addConstraint:[NSLayoutConstraint constraintWithItem:self.textField
-                                                                                attribute:NSLayoutAttributeCenterY
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:_textFieldTableViewCell
-                                                                                attribute:NSLayoutAttributeCenterY
-                                                                               multiplier:1.0
-                                                                                 constant:0]];
+                                                                            attribute:NSLayoutAttributeCenterY
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_textFieldTableViewCell
+                                                                            attribute:NSLayoutAttributeCenterY
+                                                                           multiplier:1.0
+                                                                             constant:0]];
         [_textFieldTableViewCell addConstraint:[NSLayoutConstraint constraintWithItem:self.textField
-                                                                                attribute:NSLayoutAttributeWidth
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:_textFieldTableViewCell
-                                                                                attribute:NSLayoutAttributeWidth
-                                                                               multiplier:1.0
-                                                                                 constant:-30]];
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_textFieldTableViewCell
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                           multiplier:1.0
+                                                                             constant:-30]];
         [_textFieldTableViewCell addConstraint:[NSLayoutConstraint constraintWithItem:self.textField
-                                                                                attribute:NSLayoutAttributeHeight
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:_textFieldTableViewCell
-                                                                                attribute:NSLayoutAttributeHeight
-                                                                               multiplier:1.0
-                                                                                 constant:0]];
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_textFieldTableViewCell
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                           multiplier:1.0
+                                                                             constant:0]];
         [_textFieldTableViewCell setNeedsUpdateConstraints];
-
+        
     }
     return _textFieldTableViewCell;
 }
@@ -117,18 +152,6 @@ NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
         _tableView.delegate = self;
     }
     return _tableView;
-}
-
-- (UIButton *)footerButton {
-    if (!_footerButton) {
-        _footerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-        [_footerButton setTitle:@"CLICK TO TYPE" forState:UIControlStateNormal];
-        _footerButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16];
-        [_footerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_footerButton setBackgroundColor:[UIColor colorWithRed:135/255.0 green:206/255.0 blue:255/255.0 alpha:1.0]];
-        [_footerButton addTarget:self action:@selector(toggle:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _footerButton;
 }
 
 - (AATextField *)textField {
@@ -152,13 +175,6 @@ NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
     return _autocompleteAnimalArray;
 }
 
-- (UIBarButtonItem *)rightBarButtonItem {
-    if (!_rightBarButtonItem) {
-        _rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Solution" style:UIBarButtonItemStylePlain target:self action:@selector(presentSolution)];
-    }
-    return _rightBarButtonItem;
-}
-
 #pragma mark - Property setters
 
 - (void)setSelectedAlphabetimal:(Alphabetimal *)selectedAlphabetimal {
@@ -177,59 +193,52 @@ NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
     [self.tableView reloadData];
 }
 
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if ([self.autocompleteAnimalArray count] == 0) {
+        // User is not currently typing; no autocomplete
+        // Display cell with prompt to start typing
         return 1;
-    } else {
-        if ([self.autocompleteAnimalArray count] == 0) {
-            // User is not currently typing; no autocomplete
-            // Display cell with prompt to start typing
-            return 1;
-        }
-        // Return number of autocompleted animal names
-        return [self.autocompleteAnimalArray count];
     }
+    // Return number of autocompleted animal names
+    return [self.autocompleteAnimalArray count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AATableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFER]; // if I use the indexPath method, the first row will break. Why?
+    AATableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SOLUTION_CELL_IDENTIFER]; // if I use the indexPath method, the first row will break. Why?
     
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            // Cell with text field is always in first section and row
-            return self.textFieldTableViewCell;
-        }
-    } else if (indexPath.section == 1) {
-        if ([self.autocompleteAnimalArray count] > 0) {
-            // Display name of autocomplete animal at this index path
-            cell.textLabel.text = ((Alphabetimal *)self.autocompleteAnimalArray[indexPath.row]).displayName;
+    if ([self.autocompleteAnimalArray count] > 0) {
+        // Display name of autocomplete animal at this index path
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.textLabel.text = ((Alphabetimal *)self.autocompleteAnimalArray[indexPath.row]).displayName;
+    } else {
+        cell.textLabel.textColor = [UIColor colorWithRed:135/255.0 green:206/255.0 blue:255/255.0 alpha:1.0];
+        if (self.selectedAlphabetimal) {
+            cell.textLabel.text = [@"Find another Alphabetimal!" uppercaseString];
         } else {
-            cell.textLabel.textColor = [UIColor colorWithRed:135/255.0 green:206/255.0 blue:255/255.0 alpha:1.0];
-            if (self.selectedAlphabetimal) {
-                cell.textLabel.text = [@"Find another Alphabetimal!" uppercaseString];
-            } else {
-                cell.textLabel.text = [@"Start typing!" uppercaseString];
-            }
+            cell.textLabel.text = [@"Start typing!" uppercaseString];
         }
     }
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.autocompleteAnimalArray count] > 0) {
         self.selectedAlphabetimal = self.autocompleteAnimalArray[indexPath.row];
+        [self.textField resignFirstResponder];
     } else {
         // If there is no autocomplete array, selecting the first row of the second section
         // should prompt the user to enter text in the textfield.
-        if (indexPath.row == 0 && indexPath.section == 1) {
+        if (indexPath.row == 0 && indexPath.section == 0) {
             [self.textField becomeFirstResponder];
         }
     }
@@ -289,18 +298,8 @@ NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
     }
 }
 
-- (void)toggle:(id)sender {
-    self.textField.callSuperResignFirstResponder = !self.textField.callSuperResignFirstResponder;
-    if (self.textField.callSuperResignFirstResponder) {
-        [_footerButton setTitle:@"CLICK TO TYPE" forState:UIControlStateNormal];
-    } else {
-        [_footerButton setTitle:@"CLICK TO LOAD DATA" forState:UIControlStateNormal];
-    }
-}
-
-- (void)presentSolution {
-    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:[[SolutionViewController alloc] init]];
-    [self presentViewController:controller animated:YES completion:nil];
+- (void)dismiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

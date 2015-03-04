@@ -11,8 +11,12 @@
 @implementation AATextField
 
 - (BOOL)resignFirstResponder {
-//    return NO; // This will come in handy...
-    return [super resignFirstResponder];
+    if (self.callSuperResignFirstResponder) {
+        return [super resignFirstResponder]; // Something in the UIResponder resignFirstResponder
+                                             // is allowing reloadData
+    } else {
+        return YES;
+    }
 }
 
 - (void)setText:(NSString *)text {

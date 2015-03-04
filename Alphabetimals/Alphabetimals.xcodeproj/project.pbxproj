@@ -17,6 +17,7 @@
 		F981479D1A9C1BED00A8B1CF /* alphabetimal.plist in Resources */ = {isa = PBXBuildFile; fileRef = F981479C1A9C1BED00A8B1CF /* alphabetimal.plist */; };
 		F99412151A9F4CFD00E9C134 /* AATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99412141A9F4CFD00E9C134 /* AATableViewCell.m */; };
 		F9B6BB6B1A9FFD7D00206903 /* AATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6BB6A1A9FFD7D00206903 /* AATextField.m */; };
+		F9B6BB761AA6A13F00206903 /* SolutionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6BB751AA6A13F00206903 /* SolutionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		F99412141A9F4CFD00E9C134 /* AATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATableViewCell.m; sourceTree = "<group>"; };
 		F9B6BB691A9FFD7D00206903 /* AATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATextField.h; sourceTree = "<group>"; };
 		F9B6BB6A1A9FFD7D00206903 /* AATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATextField.m; sourceTree = "<group>"; };
+		F9B6BB741AA6A13F00206903 /* SolutionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolutionViewController.h; sourceTree = "<group>"; };
+		F9B6BB751AA6A13F00206903 /* SolutionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SolutionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,8 @@
 				F99412141A9F4CFD00E9C134 /* AATableViewCell.m */,
 				F9B6BB691A9FFD7D00206903 /* AATextField.h */,
 				F9B6BB6A1A9FFD7D00206903 /* AATextField.m */,
+				F9B6BB741AA6A13F00206903 /* SolutionViewController.h */,
+				F9B6BB751AA6A13F00206903 /* SolutionViewController.m */,
 			);
 			path = Alphabetimals;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				F99412151A9F4CFD00E9C134 /* AATableViewCell.m in Sources */,
 				F98147761A9C148D00A8B1CF /* main.m in Sources */,
 				F9B6BB6B1A9FFD7D00206903 /* AATextField.m in Sources */,
+				F9B6BB761AA6A13F00206903 /* SolutionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

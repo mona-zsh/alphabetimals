@@ -10,5 +10,6 @@
 
 @interface AATextField : UITextField
 
+@property BOOL callSuperResignFirstResponder;
 
 @end
