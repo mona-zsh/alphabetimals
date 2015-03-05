@@ -27,8 +27,6 @@
 @property (nonatomic) NSMutableArray *autocompleteAnimalArray; // Array of Alphabetimal display names from autocomplete
 @property (nonatomic) Alphabetimal *selectedAlphabetimal;      // Current Alphabetimal selection from autocomplete table view
 
-@property CGFloat navBarHeight;
-
 @end
 
 @implementation SolutionViewController
@@ -38,11 +36,11 @@ CGFloat const TEXT_FIELD_TABLEVIEW_CELL_HEIGHT = 44.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTranslucent:NO];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.leftBarButtonItem = self.leftBarButtonItem;
-    self.navBarHeight = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
     
     // Add tableview and register tableviewcell class
     [self.view addSubview:self.tableView];
@@ -51,13 +49,13 @@ CGFloat const TEXT_FIELD_TABLEVIEW_CELL_HEIGHT = 44.0;
     // Set up frames
     self.tableView.frame = CGRectMake(
                                       0,
-                                      self.navBarHeight + TEXT_FIELD_TABLEVIEW_CELL_HEIGHT,
+                                      TEXT_FIELD_TABLEVIEW_CELL_HEIGHT,
                                       self.view.frame.size.width,
-                                      self.view.frame.size.height - (self.navBarHeight + TEXT_FIELD_TABLEVIEW_CELL_HEIGHT)
+                                      self.view.frame.size.height - TEXT_FIELD_TABLEVIEW_CELL_HEIGHT
                                       );
     self.textFieldTableViewCell.frame = CGRectMake(
                                                    0,
-                                                   self.navBarHeight,
+                                                   0,
                                                    self.view.frame.size.width,
                                                    TEXT_FIELD_TABLEVIEW_CELL_HEIGHT
                                                    );
@@ -68,10 +66,6 @@ CGFloat const TEXT_FIELD_TABLEVIEW_CELL_HEIGHT = 44.0;
 
     // Load alphabetimal name to data source arrays
     [self loadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-
 }
 
 - (void)loadData {

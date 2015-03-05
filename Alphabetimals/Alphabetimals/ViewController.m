@@ -36,11 +36,16 @@
 @implementation ViewController
 
 NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
+NSString * const WILL_RELOAD = @"will reloadData";
+NSString * const WILL_NOT_RESIGN = @"textfield won't resign";
+NSString * const CLICK_TO_RELOAD = @"click to reload";
+NSString * const CLICK_TO_KEEP_TYPING = @"click to keep typing";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
+    self.title = WILL_RELOAD;
     
     // Add tableview and register tableviewcell class
     [self.view addSubview:self.tableView];
@@ -134,6 +139,10 @@ NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
 - (AATextField *)textField {
     if (!_textField) {
         _textField = [[AATextField alloc] init];
+        _textFieldTableViewCell.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0];
+        _textFieldTableViewCell.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0].CGColor;
+        _textFieldTableViewCell.layer.borderWidth = 1.0;
+        _textFieldTableViewCell.layer.cornerRadius = 3.0;
         _textField.translatesAutoresizingMaskIntoConstraints = NO; // will be aligned to tableviewcell using autolayout constraints
         _textField.callSuperResignFirstResponder = YES;
         _textField.textAlignment = NSTextAlignmentCenter;
@@ -292,9 +301,11 @@ NSString * const CELL_IDENTIFER = @"ANIMAL_CELL";
 - (void)toggle:(id)sender {
     self.textField.callSuperResignFirstResponder = !self.textField.callSuperResignFirstResponder;
     if (self.textField.callSuperResignFirstResponder) {
-        [_footerButton setTitle:@"CLICK TO TYPE" forState:UIControlStateNormal];
+        self.title = WILL_RELOAD;
+        [_footerButton setTitle:CLICK_TO_KEEP_TYPING forState:UIControlStateNormal];
     } else {
-        [_footerButton setTitle:@"CLICK TO LOAD DATA" forState:UIControlStateNormal];
+        self.title = WILL_NOT_RESIGN;
+        [_footerButton setTitle:CLICK_TO_RELOAD forState:UIControlStateNormal];
     }
 }
 
