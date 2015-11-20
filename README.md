@@ -9,15 +9,15 @@ tableview under the hood methods will not get called and `reloadData` will not b
 
 There are three stages to this demo project.
 
-# Default: tableview calls reloadData but textfield resigns first responder before any text is updated.
-## Expected behavior: type one character, loads N cells, keyboard is dismissed without updating with character
+# Initial: `-[UITableView reloadData]` called, `-[UITextField resignFirstResponder]` called by system
+## Expected behavior: user types a character into the textfield, related alphabetimal cells are loaded but the keyboard will be dismissed without updating the character in the textfield
 ![](http://eskimona.com/assets/autocomplete-reload.png)
 
-# Click to Type: after tapping the click to type button, the `UITextField` will return `YES` instead of calling 
+# Click to Type: the `UITextField` is overriden to return `YES` instead of calling 
 `resignFirstResponder`.
-## Expected behavior: type as many characters as you like, loads no cells
+## Expected behavior: user types as many characters as she like, the cells will not be updated from whatever their previous state was.
 ![](http://eskimona.com/assets/autocomplete-textfield.png)
 
-# Click on Solution: textfield is no longer in a cell in the tableview
-## Expected behavior: type and see the textfield and tableview being updated
+# Click on Solution: `UITableView` no longer contains `UITextField` in one of its cells
+## Expected behavior: user types characters; the textfield will be updated with those characters and the tableview will be updated with appropriate alphabetimals that match that string
 ![](http://eskimona.com/assets/autocomplete-solution.png)
