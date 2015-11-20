@@ -16,8 +16,8 @@ There are three stages to this demo project.
 # Click to Type: after tapping the click to type button, the `UITextField` will return `YES` instead of calling 
 `resignFirstResponder`.
 ## Expected behavior: type as many characters as you like, loads no cells
-![](http://eskimona.com/assets/autocomplete-solution.png)
+![](http://eskimona.com/assets/autocomplete-textfield.png)
 
 # Click on Solution: textfield is no longer in a cell in the tableview
 ## Expected behavior: type and see the textfield and tableview being updated
-![](http://eskimona.com/assets/autocomplete-textfield.png)
+![](http://eskimona.com/assets/autocomplete-solution.png)
